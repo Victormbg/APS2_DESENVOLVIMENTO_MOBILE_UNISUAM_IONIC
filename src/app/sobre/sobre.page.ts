@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { GeoapifyService } from '../api/geoapify.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sobre',
@@ -15,8 +16,12 @@ export class SobrePage implements OnInit {
   public endereco: string = "";
   public estado: string = "";
   public bairro: string = "";
+  public mensagem: string = "";
 
-  constructor(public geoapifyService: GeoapifyService) { }
+  constructor(
+    public geoapifyService: GeoapifyService,
+    public alertController: AlertController
+  ) { }
 
   ngOnInit() {
     this.pegarLocalizacao();
@@ -45,8 +50,45 @@ export class SobrePage implements OnInit {
         this.bairro = data.features[0].properties.suburb;
       },
       (error) => {
-        console.log("Erro ao obter o endereço:", error);
+        let mensagemErro = '';
+
+        switch (error.status) {
+          case 400:
+            mensagemErro = 'Erro de solicitação inválida.';
+            break;
+          case 401:
+            mensagemErro = 'Erro de autenticação. Verifique suas credenciais.';
+            break;
+          case 403:
+            mensagemErro = 'Acesso proibido. Você não tem permissão para acessar este recurso.';
+            break;
+          case 404:
+            mensagemErro = 'Recurso não encontrado.';
+            break;
+          case 429:
+            mensagemErro = 'Muitas solicitações. Por favor, aguarde um pouco antes de tentar novamente.';
+            break;
+          case 500:
+            mensagemErro = 'Erro interno do servidor. Tente novamente mais tarde.';
+            break;
+          default:
+            mensagemErro = 'Ocorreu um erro. Por favor, tente novamente mais tarde.';
+            break;
+        }
+        console.log(`Erro ${error.status}: ${error.message}`);
+        this.mensagem = `Erro ${error.status}: ${mensagemErro}`;
+        this.exibeMensagem();
       }
     );
   }
+
+  async exibeMensagem() {
+    const alert = await this.alertController.create({
+      header: 'Erro',
+      message: this.mensagem,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
 }

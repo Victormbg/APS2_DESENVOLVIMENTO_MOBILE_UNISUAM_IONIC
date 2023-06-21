@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiFutebolService } from '../api/api-futebol.service';
 import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabelas',
@@ -16,8 +17,13 @@ export class TabelasPage implements OnInit {
   public scrollDisabled: boolean = false;
   public id_campeonato: number = 10; // Valor padrão para o CAMPEONATO BRASILEIRO
   public selectedCampeonato: string = '10'; // Valor padrão selecionado no ion-select
+  public mensagem: string = "";
 
-  constructor(public apiFutebolService: ApiFutebolService, private loadingController: LoadingController) { }
+  constructor(
+    public apiFutebolService: ApiFutebolService,
+    private loadingController: LoadingController,
+    public alertController: AlertController
+  ) { }
 
   ngOnInit() {
     this.efeitoLoading();
@@ -53,7 +59,34 @@ export class TabelasPage implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
+        let mensagemErro = '';
+
+        switch (error.status) {
+          case 400:
+            mensagemErro = 'Erro de solicitação inválida.';
+            break;
+          case 401:
+            mensagemErro = 'Erro de autenticação. Verifique suas credenciais.';
+            break;
+          case 403:
+            mensagemErro = 'Acesso proibido. Você não tem permissão para acessar este recurso.';
+            break;
+          case 404:
+            mensagemErro = 'Recurso não encontrado.';
+            break;
+          case 429:
+            mensagemErro = 'Muitas solicitações. Por favor, aguarde um pouco antes de tentar novamente.';
+            break;
+          case 500:
+            mensagemErro = 'Erro interno do servidor. Tente novamente mais tarde.';
+            break;
+          default:
+            mensagemErro = 'Ocorreu um erro. Por favor, tente novamente mais tarde.';
+            break;
+        }
+        console.log(`Erro ${error.status}: ${error.message}`);
+        this.mensagem = `Erro ${error.status}: ${mensagemErro}`;
+        this.exibeMensagem();
       }
     );
   }
@@ -91,4 +124,14 @@ export class TabelasPage implements OnInit {
       this.carregaPagina();
     }, 1000);
   }
+
+  async exibeMensagem() {
+    const alert = await this.alertController.create({
+      header: 'Erro',
+      message: this.mensagem,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
 }
