@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { App } from '@capacitor/app';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -6,9 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'home', url: '/folder/home', icon: 'home' },
-    { title: 'Location', url: '/folder/location', icon: 'map' },
+    { title: 'Campeonatos', url: 'campeonatos', icon: 'trophy' },
+    { title: 'Tabelas', url: 'tabelas', icon: 'grid' },
+    { title: 'Sobre', url: 'sobre', icon: 'information-circle' }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor() { }
+
+  sair() {
+    App.exitApp();
+  }
+
 }

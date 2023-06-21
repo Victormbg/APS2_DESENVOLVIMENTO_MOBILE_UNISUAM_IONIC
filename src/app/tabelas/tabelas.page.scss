@@ -1,0 +1,22 @@
+.campo-nome {
+    font-weight: bold;
+    width: 100px;
+}
+
+.campo-valor {
+    display: flex;
+    align-items: center;
+}
+
+.campo-valor-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.escudo-time {
+    width: 40px;
+    /* Defina o tamanho desejado para a largura */
+    height: 40px;
+    /* Defina o tamanho desejado para a altura */
+}

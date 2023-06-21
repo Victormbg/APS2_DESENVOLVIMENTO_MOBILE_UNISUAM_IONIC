@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { SobrePageRoutingModule } from './sobre-routing.module';
 
-import { FolderPage } from './folder.page';
+import { SobrePage } from './sobre.page';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -15,8 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    SobrePageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [SobrePage]
 })
-export class FolderPageModule {}
+export class SobrePageModule {}

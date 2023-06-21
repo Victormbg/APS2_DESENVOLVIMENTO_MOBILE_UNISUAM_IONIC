@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tabelas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">Tabelas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="efeitoRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down-circle-outline" pullingText="Puxe para atualizar"
+      refreshingSpinner="circles" refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item>
+    <ion-label>Campeonato:</ion-label>
+    <ion-select [(ngModel)]="selectedCampeonato" (ionChange)="changeCampeonato()">
+      <ion-select-option value="10">CAMPEONATO BRASILEIRO</ion-select-option>
+      <ion-select-option value="2">COPA DO BRASIL</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-card *ngFor="let tabela of tabelas" class="tabela-card">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label class="campo-nome">Posição:</ion-label>
+          <ion-label class="campo-valor">{{ tabela.posicao }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="campo-nome">Pontos:</ion-label>
+          <ion-label class="campo-valor">{{ tabela.pontos }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="campo-valor">
+            <div class="campo-nome">Time:</div>
+            <div class="campo-valor-inner">
+              <img [src]="tabela.time.escudo" alt="Escudo" class="escudo-time" />
+              {{ tabela.time.nome_popular }}
+            </div>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="campo-nome">Jogos:</ion-label>
+          <ion-label class="campo-valor">{{ tabela.jogos }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="campo-nome">Vitórias:</ion-label>
+          <ion-label class="campo-valor">{{ tabela.vitorias }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="campo-nome">Empates:</ion-label>
+          <ion-label class="campo-valor">{{ tabela.empates }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="campo-nome">Derrotas:</ion-label>
+          <ion-label class="campo-valor">{{ tabela.derrotas }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="efeitoScrollInfinito($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

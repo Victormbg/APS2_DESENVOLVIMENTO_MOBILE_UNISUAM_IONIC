@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sobre</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">Sobre</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-row class="dev-row">
+    <ion-col size="6" class="dev-column">
+      <img src="assets/devs/victor.png" alt="Victor" />
+      <h3>Victor Garcia</h3>
+      <p>Matrícula: 20102283</p>
+    </ion-col>
+    <ion-col size="6" class="dev-column">
+      <img src="assets/devs/felipe.png" alt="Felipe" />
+      <h3>Felipe Vargas</h3>
+      <p>Matrícula: 19101345</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-card class="app-info">
+    <ion-card-content>
+      <p>Este APP está localizado no bairro <span class="highlight">{{ bairro }}</span>, estado <span class="highlight">{{ estado }}</span>.</p>
+      <p>Este aplicativo utiliza as seguintes APIs:</p>
+      <ul>
+        <li>api.api-futebol.com.br</li>
+        <li>api.geoapify.com</li>
+      </ul>
+      <p>Foi utilizado o Capacitor/Geolocation para obter informações de localização.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <footer class="footer">
+    <p>&copy; 2023 Victor Garcia & Felipe Vargas. Todos os direitos reservados.</p>
+  </footer>
+</ion-content>

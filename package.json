@@ -1,7 +1,7 @@
 {
-  "name": "aps2",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "FutApp",
+  "version": "1.0.0",
+  "author": "Victor Garcia & Felipe Vargas",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
