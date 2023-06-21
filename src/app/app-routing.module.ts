@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'campeonatos',
     loadChildren: () => import('./campeonatos/campeonatos.module').then( m => m.CampeonatosPageModule)
+  },
+  {
+    path: 'times',
+    loadChildren: () => import('./times/times.module').then( m => m.TimesPageModule)
   }
 ];
 
