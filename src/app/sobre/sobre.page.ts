@@ -30,29 +30,24 @@ export class SobrePage implements OnInit, AfterViewInit {
   ) { }
 
   async ngOnInit() {
+    this.pegarLocalizacao();
     try {
       await this.storage.create();
-
       const exibirSobre = await this.storage.get('exibirSobre');
       const entrarCount = await this.storage.get('entrarCount');
-
       if (exibirSobre === false || entrarCount > 10) {
         this.router.navigateByUrl('/login');
       } else {
         // O valor armazenado indica que a tela de sobre deve ser exibida
         // Realize qualquer ação necessária
       }
-
       console.log('Valor lido do armazenamento local (exibirSobre):', exibirSobre);
       console.log('Valor lido do armazenamento local (entrarCount):', entrarCount);
-
-      this.pegarLocalizacao();
     } catch (error) {
       console.error('Erro ao acessar o armazenamento local:', error);
       // Trate o erro de acordo com a sua necessidade
     }
   }
-
 
   ionViewDidEnter() {
     this.menuController.swipeGesture(false, 'start');
