@@ -33,10 +33,12 @@ export class TabelasPage implements OnInit {
   changeCampeonato() {
     this.page = 1;
     this.tabelas = []; // Limpa os dados ao alterar o campeonato
+    this.id_campeonato = Number(this.selectedCampeonato); // Atribui o valor selecionado a id_campeonato
     this.carregaPagina();
   }
 
   carregaPagina() {
+    console.log("TES1: "+ this.id_campeonato)
     this.apiFutebolService.getTabelas(this.id_campeonato).subscribe(
       (data) => {
         const response = data as any;
