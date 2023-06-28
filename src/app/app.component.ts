@@ -7,12 +7,13 @@ import { App } from '@capacitor/app';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  
   public appPages = [
     { title: 'Campeonatos', url: 'campeonatos', icon: 'trophy' },
     { title: 'Tabelas', url: 'tabelas', icon: 'grid' },
-    { title: 'Times', url: 'times', icon: 'people' },
-    { title: 'Sobre', url: 'sobre', icon: 'information-circle' }
+    { title: 'Times', url: 'times', icon: 'people' }
   ];
+  
   constructor() { }
 
   sair() {

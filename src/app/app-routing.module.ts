@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'campeonatos',
+    redirectTo: 'sobre',
     pathMatch: 'full'
   },
   {
@@ -22,6 +22,14 @@ const routes: Routes = [
   {
     path: 'times',
     loadChildren: () => import('./times/times.module').then( m => m.TimesPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./usu/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'inserir',
+    loadChildren: () => import('./usu/inserir/inserir.module').then( m => m.InserirPageModule)
   }
 ];
 

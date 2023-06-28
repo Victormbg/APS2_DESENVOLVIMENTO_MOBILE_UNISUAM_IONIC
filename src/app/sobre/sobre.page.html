@@ -1,40 +1,85 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Sobre</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="fullscreen-swiper">
+  <div class="slide-background">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h3>Bem Vindo ao</h3>
+            <h2>FUTAPP</h2>
+          </div>
+        </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar color="primary">
-      <ion-title size="large">Sobre</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <!-- Slide 2 -->
+        <div class="swiper-slide">
+          <ion-row class="dev-row">
+            <h2>Programação Móvel</h2>
+            <h3>Turma: BS - INF0801N - 2023-1</h3>
+            <ion-col size="12" class="dev-column ion-text-center">
+              <img src="assets/devs/victor.png" alt="Victor" />
+              <h3>Aluno: Victor Garcia</h3>
+              <p>Matrícula: 20102283</p>
+              <p>Professor: Marcelo Soares Loutfi</p>
+            </ion-col>
+          </ion-row>
+        </div>
 
-  <ion-row class="dev-row">
-    <ion-col size="12" class="dev-column ion-text-center">
-      <img src="assets/devs/victor.png" alt="Victor" />
-      <h3>Victor Garcia</h3>
-      <p>Matrícula: 20102283</p>
-    </ion-col>
-  </ion-row>
+        <!-- Slide 3 -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h3>Informações Técnicas</h3>
+            <p>Este APP está localizado no bairro <span class="highlight">{{ bairro }}</span>, estado <span
+                class="highlight">{{ estado }}</span>.</p>
+            <p>Este aplicativo utiliza as seguintes APIs:</p>
+            <ul>
+              <li>api.api-futebol.com.br</li>
+              <li>api.geoapify.com</li>
+            </ul>
+            <p>Foi utilizado o Capacitor/Geolocation para obter informações de localização.</p>
+          </div>
+        </div>
 
-  <ion-card class="app-info">
-    <ion-card-content>
-      <p>Este APP está localizado no bairro <span class="highlight">{{ bairro }}</span>, estado <span class="highlight">{{ estado }}</span>.</p>
-      <p>Este aplicativo utiliza as seguintes APIs:</p>
-      <ul>
-        <li>api.api-futebol.com.br</li>
-        <li>api.geoapify.com</li>
-      </ul>
-      <p>Foi utilizado o Capacitor/Geolocation para obter informações de localização.</p>
-    </ion-card-content>
-  </ion-card>
+        <!-- Slide 4 -->
+        <div class="swiper-slide swiper-slide-last">
+          <div class="slide-content">
+            <h3>Informações Sobre o APP</h3>
+            <p>Este APP, focado em futebol, mostra informações atualizadas sobre os campeonatos.</p>
+            <p>Além disso, pelos campeonatos, é possível obter as informações das tabelas de jogos daquele campeonato.
+            </p>
+            <p>Também é possível ver informações dos times buscando pelos times nos campeonatos.</p>
+          </div>
+        </div>
 
-  <footer class="footer">
-    <p>&copy; 2023 Victor Garcia. Todos os direitos reservados.</p>
-  </footer>
+        <!-- Slide 5 -->
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <h3>informações Tecnicas</h3>
+            <p>Este APP está localizado no bairro <span class="highlight">{{ bairro }}</span>, estado <span
+                class="highlight">{{ estado }}</span>.</p>
+            <p>Este aplicativo utiliza as seguintes APIs:</p>
+            <ul>
+              <li>api.api-futebol.com.br</li>
+              <li>api.geoapify.com</li>
+            </ul>
+            <p>Foi utilizado o Capacitor/Geolocation para obter informações de localização.</p>
+          </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="swiper-slide swiper-slide-last">
+          <div class="slide-content">
+            <p>&copy; 2023 Victor Garcia. Todos os direitos reservados.</p>
+            <div class="button-container">
+              <ion-button color="primary" expand="block" routerLink="/login">Sair</ion-button>
+              <ion-button color="primary" expand="block">Não exibir mais</ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
 </ion-content>

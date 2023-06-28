@@ -1,16 +1,104 @@
-.footer {
-    text-align: center;
-    padding: 10px;
+.fullscreen-swiper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.app-info {
-    margin-top: 20px;
-    padding: 10px;
+.slide-background {
+    width: 100%;
+    height: 100%;
+
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+
+        .swiper-wrapper {
+            height: 100%;
+        }
+
+        .swiper-slide {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            ion-row {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+
+                img {
+                    margin-bottom: 10px;
+                }
+            }
+
+            .app-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .swiper-button-next {
+            right: 10px;
+        }
+
+        .swiper-button-prev {
+            left: 10px;
+        }
+    }
 }
 
-.highlight {
-    font-weight: bold;
-    /* Define a fonte em negrito */
-    color: blue;
-    /* Define a cor do texto em azul */
+.slide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.slide-content p {
+    margin-bottom: 10px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.swiper-slide-last .slide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    font-size: 14px;
+    width: 30px;
+    height: 30px;
 }

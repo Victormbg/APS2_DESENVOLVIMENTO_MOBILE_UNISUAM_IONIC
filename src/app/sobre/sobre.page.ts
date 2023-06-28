@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { GeoapifyService } from '../api/geoapify.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-sobre',
@@ -9,39 +10,56 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./sobre.page.scss'],
   providers: [GeoapifyService],
 })
-export class SobrePage implements OnInit {
+export class SobrePage implements OnInit, AfterViewInit {
 
   public latitude: number = 1;
   public longitude: number = 1;
-  public endereco: string = "";
-  public estado: string = "";
-  public bairro: string = "";
-  public mensagem: string = "";
+  public endereco: string = '';
+  public estado: string = '';
+  public bairro: string = '';
+  public mensagem: string = '';
 
   constructor(
     public geoapifyService: GeoapifyService,
-    public alertController: AlertController
-  ) { }
+    public alertController: AlertController,
+    private menuController: MenuController
+  ) {}
 
   ngOnInit() {
     this.pegarLocalizacao();
   }
 
+  ionViewDidEnter() {
+    this.menuController.swipeGesture(false, 'start');
+  }
+
+  ionViewDidLeave() {
+    this.menuController.swipeGesture(true, 'start');
+  }
+
+  ngAfterViewInit() {
+    const swiper = new Swiper('.swiper-container', {
+      loop: true,
+      allowSlideNext: true,
+      allowSlidePrev: true,
+    });
+  }
+
   async pegarLocalizacao() {
     try {
-      console.log("Usando o Geolocation native do capacitor");
+      console.log('Usando o Geolocation native do capacitor');
       const coordinates = await Geolocation.getCurrentPosition();
       this.latitude = coordinates.coords.latitude;
       this.longitude = coordinates.coords.longitude;
       console.log('Latitude:', this.latitude, 'longitude', this.longitude);
       this.pegarEndereco();
     } catch (error) {
-      console.log("Erro ao obter localização:", error);
+      console.log('Erro ao obter localização:', error);
     }
   }
 
   pegarEndereco() {
-    console.log("Usando a API Geoapify");
+    console.log('Usando a API Geoapify');
     this.geoapifyService.getReverseGeocoding(this.latitude, this.longitude).subscribe(
       (data: any) => {
         console.log(data);
@@ -86,9 +104,8 @@ export class SobrePage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Erro',
       message: this.mensagem,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     await alert.present();
   }
-
 }
