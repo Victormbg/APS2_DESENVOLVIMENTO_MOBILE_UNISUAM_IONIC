@@ -3,6 +3,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { GeoapifyService } from '../api/geoapify.service';
 import { AlertController, MenuController } from '@ionic/angular';
 import Swiper from 'swiper';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-sobre',
@@ -22,12 +24,35 @@ export class SobrePage implements OnInit, AfterViewInit {
   constructor(
     public geoapifyService: GeoapifyService,
     public alertController: AlertController,
-    private menuController: MenuController
-  ) {}
+    private menuController: MenuController,
+    private router: Router,
+    private storage: Storage
+  ) { }
 
-  ngOnInit() {
-    this.pegarLocalizacao();
+  async ngOnInit() {
+    try {
+      await this.storage.create();
+
+      const exibirSobre = await this.storage.get('exibirSobre');
+      const entrarCount = await this.storage.get('entrarCount');
+
+      if (exibirSobre === false || entrarCount > 10) {
+        this.router.navigateByUrl('/login');
+      } else {
+        // O valor armazenado indica que a tela de sobre deve ser exibida
+        // Realize qualquer ação necessária
+      }
+
+      console.log('Valor lido do armazenamento local (exibirSobre):', exibirSobre);
+      console.log('Valor lido do armazenamento local (entrarCount):', entrarCount);
+
+      this.pegarLocalizacao();
+    } catch (error) {
+      console.error('Erro ao acessar o armazenamento local:', error);
+      // Trate o erro de acordo com a sua necessidade
+    }
   }
+
 
   ionViewDidEnter() {
     this.menuController.swipeGesture(false, 'start');
@@ -108,4 +133,19 @@ export class SobrePage implements OnInit, AfterViewInit {
     });
     await alert.present();
   }
+
+  doNotShowAgain() {
+    // Salva a informação no armazenamento local
+    this.storage.set('exibirSobre', false)
+      .then(() => {
+        console.log('Informação gravada no armazenamento local com sucesso.');
+        // Redireciona para a página de login
+        this.router.navigateByUrl('/login');
+      })
+      .catch((error) => {
+        console.error('Erro ao gravar informação no armazenamento local:', error);
+        // Trate o erro de acordo com a sua necessidade
+      });
+  }
+
 }

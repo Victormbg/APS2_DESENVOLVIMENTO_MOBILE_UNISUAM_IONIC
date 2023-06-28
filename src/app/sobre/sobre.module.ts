@@ -8,6 +8,8 @@ import { SobrePageRoutingModule } from './sobre-routing.module';
 
 import { SobrePage } from './sobre.page';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage-angular';
+
 
 @NgModule({
   imports: [
@@ -15,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    SobrePageRoutingModule
+    SobrePageRoutingModule,
+    IonicStorageModule.forRoot()
   ],
   declarations: [SobrePage]
 })

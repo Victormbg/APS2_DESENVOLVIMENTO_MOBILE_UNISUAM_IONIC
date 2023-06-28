@@ -27,7 +27,7 @@ export class InserirPage implements OnInit {
     this.autenticacaoService.insereNoFirebase(this.email, this.senha)
       .then((res) => {
         console.log(res)
-        this.router.navigate(['app/tabs/tab1']);
+        this.router.navigate(['campeonatos']);
       }).catch((error) => {
         console.log(error)
         switch (error.code) {

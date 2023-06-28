@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
         const uid = user.uid; // ID do usuário
         const email = user.email; // E-mail do usuário
         console.log(`Usuário logado: Email - ${email}, ID - ${uid}`);
-        this.router.navigate(['app/tabs/tab1']);
+        this.router.navigate(['campeonatos']);
       }).catch((error) => {
         console.log(error)
         switch (error.code) {
@@ -60,7 +60,7 @@ export class LoginPage implements OnInit {
             this.mensagem = 'É necessário fornecer uma senha.';
             break;
           default:
-            this.mensagem = 'Erro ao tentar criar o usuário!';
+            this.mensagem = 'Erro ao tentar logar o usuário!';
             break;
         }
         this.exibeMensagem();
